@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "demo";
+$dbname = "crud_operation";
 $connection = new mysqli($servername, $username, $password, $dbname);
 // validate the database connection
 if($connection->connect_error) {

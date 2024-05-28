@@ -115,7 +115,7 @@ if (isset($_POST['submit'])) {
             <div class="mb-3">
                 <label for="email" class="form-label">Email address</label>
                 <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp"
-                    value=<?php if (!isset($emailError)) {
+                    value=<?php if (!isset($emailError) && isset($email)) {
                         echo $email;
                     } else {
                         echo "";
@@ -128,7 +128,7 @@ if (isset($_POST['submit'])) {
             <div class="mb-3">
                 <label for="firstName" class="form-label">First Name</label>
                 <input type="text" class="form-control" id="firstName" name="firstName" value=<?php
-                if (!isset($firstNameError)) {
+                if (!isset($firstNameError) && isset($firstName) ) {
                     echo $firstName;
                 } else {
                     echo "";
@@ -139,7 +139,7 @@ if (isset($_POST['submit'])) {
             </div>
             <div class="mb-3">
                 <label for="lastName" class="form-label">Last Name</label>
-                <input type="text" class="form-control" id="lastName" name="lastName" value=<?php if (!isset($lastNameError)) {
+                <input type="text" class="form-control" id="lastName" name="lastName" value=<?php if (!isset($lastNameError) && isset($lastName)) {
                     echo $lastName;
                 } else {
                     echo "";
@@ -150,7 +150,7 @@ if (isset($_POST['submit'])) {
             </div>
             <div class="mb-3">
                 <label for="instituteName" class="form-label">Institute Name</label>
-                <input type="text" class="form-control" id="instituteName" name="instituteName" value=<?php if (!isset($instituteNameError)) {
+                <input type="text" class="form-control" id="instituteName" name="instituteName" value=<?php if (!isset($instituteNameError) && isset($instituteName)) {
                     echo $instituteName;
                 } else {
                     echo "";
@@ -162,7 +162,7 @@ if (isset($_POST['submit'])) {
             <div class="mb-3">
                 <label for="city" class="form-label">City</label>
                 <input type="text" class="form-control" id="city" name="city" value=<?php if (
-                    !isset($cityError)
+                    !isset($cityError) && isset($city)
                 ) {
                     echo $city;
                 } else {
@@ -175,7 +175,7 @@ if (isset($_POST['submit'])) {
             <div class="mb-3">
                 <label for="state" class="form-label">State</label>
                 <input type="text" class="form-control" id="state" name="state" value=<?php
-                if (!isset($stateError)) {
+                if (!isset($stateError) && isset($state)) {
                     echo $state;
                 } else {
                     echo "";
@@ -188,7 +188,7 @@ if (isset($_POST['submit'])) {
             <div class="mb-3">
                 <label for="CGPA" class="form-label">CGPA</label>
                 <input type="text" class="form-control" id="CGPA" name="CGPA" value=<?php
-                if (!isset($CGPAError)) {
+                if (!isset($CGPAError) && isset($CGPA)) {
                     echo $CGPA;
                 } else {
                     echo "";
@@ -201,7 +201,7 @@ if (isset($_POST['submit'])) {
             <div class="mb-3">
                 <label for="dateOfBirth" class="form-label">Date of Birth</label>
                 <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" value=<?php
-                if (!isset($dateOfBirthError)) {
+                if (!isset($dateOfBirthError) && isset($dateOfBirth)) {
                     echo $dateOfBirth;
                 } else {
                     echo "";
@@ -213,7 +213,7 @@ if (isset($_POST['submit'])) {
             <div class="mb-3">
                 <label for="mobileNumber" class="form-label">Mobile Number</label>
                 <input type="text" class="form-control" id="mobileNumber" name="mobileNumber" value=<?php
-                if (!isset($mobileNumberError)) {
+                if (!isset($mobileNumberError) && isset($mobileNumber)) {
                     echo $mobileNumber;
                 } else {
                     echo "";
@@ -226,7 +226,7 @@ if (isset($_POST['submit'])) {
             <div class="mb-3">
                 <label for="gender" class="form-label">Gander</label>
                 <select class="form-control" id="gender" name="gender" value=<?php
-                if (!isset($genderError)) {
+                if (!isset($genderError) && isset($gender)) {
                     echo $gender;
                 } else {
                     echo "";
