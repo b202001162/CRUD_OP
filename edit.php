@@ -3,97 +3,104 @@
 include 'config.php';
 
 if (isset($_POST['submit'])) {
-    // **Data Validation (improves security)**
-    $firstName = trim($_POST['firstName']);
-    if (empty($firstName)) {
-        $firstNameError = "First Name is required";
-    } else {
-        // remove the error
-        unset($firstNameError);
-    }
-    $lastName = trim($_POST['lastName']);
-    if (empty($lastName)) {
-        $lastNameError = "Last Name is required";
-    } else {
-        // remove the error
-        unset($lastNameError);
-    }
-    $instituteName = trim($_POST['instituteName']);
-    if (empty($instituteName)) {
-        $instituteNameError = "Institute Name is required";
-    } else {
-        // remove the error
-        unset($instituteNameError);
-    }
-    $city = trim($_POST['city']);
-    if (empty($city)) {
-        $cityError = "City is required";
-    } else {
-        // remove the error
-        unset($cityError);
-    }
-    $state = trim($_POST['state']);
-    if (empty($state)) {
-        $stateError = "State is required";
-    } else {
-        // remove the error
-        unset($stateError);
-    }
+    $email = $_POST['email'];
+    $firstName = $_POST['firstName'];
+    $lastName = $_POST['lastName'];
+    $instituteName = $_POST['instituteName'];
+    $city = $_POST['city'];
+    $state = $_POST['state'];
+    $CGPA = $_POST['CGPA'];
+    $dateOfBirth = $_POST['dateOfBirth'];
+    $mobileNumber = $_POST['mobileNumber'];
+    $gender = $_POST['gender'];
+    $id = $_GET['id'];
 
-    // CGPA might require additional validation to ensure it's a number
-    $CGPA = trim($_POST['CGPA']);
-    if (empty($CGPA)) {
-        $CGPAError = "CGPA is required";
-    } else {
-        // remove the error
-        unset($CGPAError);
-    }
-
-    $email = trim($_POST['email']);
     if (empty($email)) {
         $emailError = "Email is required";
     } else {
-        // remove the error
-        unset($emailError);
+        $emailError = "";
     }
-    $dateOfBirth = trim($_POST['dateOfBirth']);
+    if (empty($firstName)) {
+        $firstNameError = "First Name is required";
+    } else {
+        $firstNameError = "";
+    }
+    if (empty($lastName)) {
+        $lastNameError = "Last Name is required";
+    } else {
+        $lastNameError = "";
+    }
+    if (empty($instituteName)) {
+        $instituteNameError = "Institute Name is required";
+    } else {
+        $instituteNameError = "";
+    }
+    if (empty($city)) {
+        $cityError = "City is required";
+    } else {
+        $cityError = "";
+    }
+    if (empty($state)) {
+        $stateError = "State is required";
+    } else {
+        $stateError = "";
+    }
+    if (empty($CGPA)) {
+        $CGPAError = "CGPA is required";
+    } else {
+        $CGPAError = "";
+    }
     if (empty($dateOfBirth)) {
         $dateOfBirthError = "Date of Birth is required";
     } else {
-        // remove the error
-        unset($dateOfBirthError);
+        $dateOfBirthError = "";
     }
-    $mobileNumber = trim($_POST['mobileNumber']);
     if (empty($mobileNumber)) {
         $mobileNumberError = "Mobile Number is required";
     } else {
-        // remove the error
-        unset($mobileNumberError);
+        $mobileNumberError = "";
     }
-    $gender = trim($_POST['gender']);
     if (empty($gender)) {
         $genderError = "Gender is required";
     } else {
-        // remove the error
-        unset($genderError);
+        $genderError = "";
     }
 
-    if (!isset($emailError) && !isset($firstNameError) && !isset($lastNameError) && !isset($instituteNameError) && !isset($cityError) && !isset($stateError) && !isset($CGPAError) && !isset($dateOfBirthError) && !isset($mobileNumberError) && !isset($genderError)) {
-        // Prepare the SQL statement with prepared statements (improves security)
-        $sql = "INSERT INTO students (firstName, lastName, instituteName, city, state, CGPA, email, dateOfBirth, mobileNumber, gender) VALUES ('$firstName', '$lastName', '$instituteName', '$city', '$state', $CGPA, '$email', '$dateOfBirth', '$mobileNumber', '$gender');";
-
+    if ($emailError == "" && $firstNameError == "" && $lastNameError == "" && $instituteNameError == "" && $cityError == "" && $stateError == "" && $CGPAError == "" && $dateOfBirthError == "" && $mobileNumberError == "" && $genderError == "") {
+        $sql = "UPDATE students SET email = '$email', firstName = '$firstName', lastName = '$lastName', instituteName = '$instituteName', city = '$city', state = '$state', CGPA = '$CGPA', dateOfBirth = '$dateOfBirth', mobileNumber = '$mobileNumber', gender = '$gender' WHERE id = $id";
         $result = mysqli_query($connection, $sql);
-
         if ($result) {
-            echo "<script>alert('New record created successfully');</script>";
-            header('location: view.php');
+            echo "Record updated successfully";
+            header('location: ../view.php');
         } else {
-            echo "Error: " . $sql . "<br>" . $connection->error;
+            echo "Error updating record: " . $connection->error;
         }
     }
-
-    $connection->close();
 }
+
+// check if the id parameter is set in the URL
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+    // display the record from the database
+    $sql = "SELECT * FROM students WHERE id = $id";
+    $result = mysqli_query($connection, $sql);
+    if (mysqli_num_rows($result) > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $id = $row['id'];
+            $firstName = $row['firstName'];
+            $lastName = $row['lastName'];
+            $instituteName = $row['instituteName'];
+            $city = $row['city'];
+            $state = $row['state'];
+            $CGPA = $row['CGPA'];
+            $email = $row['email'];
+            $dateOfBirth = $row['dateOfBirth'];
+            $mobileNumber = $row['mobileNumber'];
+            $gender = $row['gender'];
+        }
+    }
+}
+
 ?>
 
 <!doctype html>
@@ -111,8 +118,16 @@ if (isset($_POST['submit'])) {
 
 <body>
     <div class="container mb-3 mt-3">
-        <h2 class="mb-3">Create Operation</h2>
+        <h2 class="mb-3">Edit Operation</h2>
         <form action="" method="POST">
+            <div class="mb-3">
+                <label for="id" class="form-label">Id</label>
+                <input type="text" class="form-control" id="id" name="id" disabled value=<?php if (isset($id)) {
+                    echo $id;
+                } else {
+                    echo "";
+                } ?>>
+            </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email address</label>
                 <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp"
@@ -129,7 +144,7 @@ if (isset($_POST['submit'])) {
             <div class="mb-3">
                 <label for="firstName" class="form-label">First Name</label>
                 <input type="text" class="form-control" id="firstName" name="firstName" value=<?php
-                if (!isset($firstNameError) && isset($firstName) ) {
+                if (!isset($firstNameError) && isset($firstName)) {
                     echo $firstName;
                 } else {
                     echo "";
