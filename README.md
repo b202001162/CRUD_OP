@@ -28,7 +28,7 @@ All the fields are already filled with old values; you can edit anyone (except I
 ![image](https://github.com/b202001162/CRUD_OP/assets/86399274/00cf5927-2a9c-4bb4-96e1-9198888a3839)
 Want to delete the first row.
 
-![image](https://github.com/b202001162/CRUD_OP/assets/86399274/023a92d7-7340-4220-b2b6-793f00b7104e)
+![image](https://github.com/b202001162/CRUD_OP/assets/86399274/a448f95b-8637-4655-93e4-27984aa8ceb6)
 Bootstrap Modal will pop up when you press the delete button. 
 
 ![image](https://github.com/b202001162/CRUD_OP/assets/86399274/4e1e1dea-7b07-4297-be21-95eb2274a670)
