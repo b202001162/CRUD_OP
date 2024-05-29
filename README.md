@@ -17,6 +17,7 @@ After submitting the form.
 ## READ
 
 ![image](https://github.com/b202001162/CRUD_OP/assets/86399274/00cf5927-2a9c-4bb4-96e1-9198888a3839)
+10 rows per page
 
 ## UPDATE
 
