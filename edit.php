@@ -71,7 +71,7 @@ if (isset($_POST['submit'])) {
         $result = mysqli_query($connection, $sql);
         if ($result) {
             echo "Record updated successfully";
-            header('location: ../view.php');
+            header('location: view.php');
         } else {
             echo "Error updating record: " . $connection->error;
         }
